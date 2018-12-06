@@ -11,7 +11,7 @@ class SqlFeature private constructor(
     private val monitor: ApplicationEvents
 ) {
     init {
-        monitor.subscribe(ApplicationStarting, ::onStarting)
+        monitor.subscribe(ApplicationStarted, ::onStarted)
         monitor.subscribe(ApplicationStopPreparing, ::onStopPreparing)
     }
 
@@ -19,7 +19,7 @@ class SqlFeature private constructor(
 
     class Config : HikariConfig()
 
-    private fun onStarting(app: Application) {
+    private fun onStarted(app: Application) {
         monitor.raise(DBConnecting, app)
         dataSource = HikariDataSource(config)
         dataSources[app] = dataSource
