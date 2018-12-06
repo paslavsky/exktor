@@ -1,3 +1,5 @@
+package net.paslavsky.ktor.exposed
+
 import io.ktor.application.Application
 import io.ktor.application.ApplicationEvents
 import io.ktor.application.ApplicationFeature
@@ -7,12 +9,6 @@ import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.transactions.TransactionManager
 import java.sql.Connection
 
-/**
- * TODO Describe
- *
- * @author Andrey Paslavsky
- * @since 0.0.1
- */
 class ExposedFeature private constructor(
     monitor: ApplicationEvents,
     config: Config

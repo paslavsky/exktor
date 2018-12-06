@@ -6,12 +6,6 @@ import io.ktor.util.AttributeKey
 import io.ktor.util.KtorExperimentalAPI
 import com.zaxxer.hikari.HikariDataSource
 
-/**
- * TODO Describe
- *
- * @author Andrey Paslavsky
- * @since 0.0.1
- */
 class SqlFeature private constructor(
     private val config: Config,
     private val monitor: ApplicationEvents
