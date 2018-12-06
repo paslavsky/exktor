@@ -12,7 +12,7 @@ plugins {
 }
 
 group = "net.paslavsky"
-version = "1.0.1.1"
+version = "1.0.1-1"
 
 val ktor_version: String by project
 
@@ -27,7 +27,7 @@ subprojects {
     }
 
     group = "net.paslavsky"
-    version = "1.0.1.1"
+    version = "1.0.1-1"
 
     repositories {
         mavenCentral()
