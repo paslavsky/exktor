@@ -6,13 +6,13 @@ import org.gradle.api.tasks.bundling.Jar
 
 plugins {
     base
-    kotlin("jvm") version "1.3.0" apply false
+    kotlin("jvm") version "1.3.11" apply false
     id("com.jfrog.bintray") version "1.8.4" apply false
     `maven-publish`
 }
 
 group = "net.paslavsky"
-version = "1.0.1-1"
+version = "1.1.1"
 
 val ktor_version: String by project
 
@@ -27,7 +27,7 @@ subprojects {
     }
 
     group = "net.paslavsky"
-    version = "1.0.1-1"
+    version = "1.1.1"
 
     repositories {
         mavenCentral()
@@ -47,7 +47,7 @@ subprojects {
     }
 
     val sourcesJar by tasks.registering(Jar::class) {
-        classifier = "sources"
+        archiveClassifier.set("sources")
         from(sourceSets["main"].allSource)
     }
 
@@ -80,7 +80,6 @@ subprojects {
     }
 }
 
-
-task<Wrapper>("wrapper") {
-    gradleVersion = "4.10.2"
+tasks.wrapper {
+    gradleVersion = "5.1"
 }

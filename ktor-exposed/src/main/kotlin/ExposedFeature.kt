@@ -15,18 +15,17 @@ class ExposedFeature private constructor(
 ) {
     init {
         val (setupConnection, manager, init) = config
-        val setupConnectionOrDefault = setupConnection ?: {}
         monitor.subscribe(DBConnected) {
             if (manager != null) {
                 Database.connect(
                     datasource = it,
-                    setupConnection = setupConnectionOrDefault,
+                    setupConnection = setupConnection,
                     manager = manager
                 )
             } else {
                 Database.connect(
                     datasource = it,
-                    setupConnection = setupConnectionOrDefault
+                    setupConnection = setupConnection
                 )
             }
             init()
@@ -34,13 +33,25 @@ class ExposedFeature private constructor(
     }
 
     class Config {
+        private var init: () -> Unit = {}
+        private var setupConnection: ((Connection) -> Unit) = {}
+        private var manager: ((Database) -> TransactionManager)? = null
+
         internal operator fun component1() = setupConnection
         internal operator fun component2() = manager
         internal operator fun component3() = init
 
-        var setupConnection: ((Connection) -> Unit)? = null
-        var manager: ((Database) -> TransactionManager)? = null
-        var init: () -> Unit = {}
+        fun setupConnection(setupConnection: (Connection) -> Unit) {
+            this.setupConnection = setupConnection
+        }
+
+        fun manager(manager: (Database) -> TransactionManager) {
+            this.manager = manager
+        }
+
+        fun init(init: () -> Unit) {
+            this.init = init
+        }
     }
 
     companion object Feature : ApplicationFeature<Application, Config, ExposedFeature> {

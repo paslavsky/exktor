@@ -5,10 +5,14 @@ import io.ktor.application.*
 import io.ktor.util.AttributeKey
 import io.ktor.util.KtorExperimentalAPI
 import com.zaxxer.hikari.HikariDataSource
+import kotlinx.coroutines.cancel
+import org.slf4j.LoggerFactory
+import kotlin.system.exitProcess
 
 class SqlFeature private constructor(
     private val config: Config,
-    private val monitor: ApplicationEvents
+    private val monitor: ApplicationEvents,
+    private val pipeline: Application
 ) {
     init {
         monitor.subscribe(ApplicationStarted, ::onStarted)
@@ -21,9 +25,26 @@ class SqlFeature private constructor(
 
     private fun onStarted(app: Application) {
         monitor.raise(DBConnecting, app)
-        dataSource = HikariDataSource(config)
-        dataSources[app] = dataSource
-        monitor.raise(DBConnected, dataSource)
+        var success = false
+        for (i in 1..10) {
+            try {
+                dataSource = HikariDataSource(config).also {
+                    it.evictConnection(it.connection)
+                }
+                success = true
+                break
+            } catch (e: Exception) {
+                LoggerFactory.getLogger(javaClass).error("Failed to connect to the database", e)
+                Thread.sleep(100)
+            }
+        }
+
+        if (success) {
+            pipeline.attachDataSource(dataSource)
+            monitor.raise(DBConnected, dataSource)
+        } else {
+            exitProcess(1)
+        }
     }
 
     private fun onStopPreparing(environment: ApplicationEnvironment) {
@@ -31,6 +52,7 @@ class SqlFeature private constructor(
         if (dataSource.isClosed) {
             dataSource.close()
         }
+        pipeline.detachDataSource()
         monitor.raise(DBClosed, environment)
     }
 
@@ -96,7 +118,7 @@ class SqlFeature private constructor(
                 set("leakDetectionThreshold", this::setLeakDetectionThreshold)
                 set("schema", this::setSchema)
             }.apply(configure)
-            return SqlFeature(configuration, pipeline.environment.monitor)
+            return SqlFeature(configuration, pipeline.environment.monitor, pipeline)
         }
     }
 }
