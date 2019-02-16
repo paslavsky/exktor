@@ -1,18 +1,18 @@
 import com.jfrog.bintray.gradle.BintrayExtension
-import com.jfrog.bintray.gradle.tasks.BintrayUploadTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.gradle.api.plugins.ExtensionAware
 import org.gradle.api.tasks.bundling.Jar
 
 plugins {
     base
-    kotlin("jvm") version "1.3.11" apply false
+    kotlin("jvm") version "1.3.21" apply false
     id("com.jfrog.bintray") version "1.8.4" apply false
+    id("com.github.ben-manes.versions") version "0.20.0"
     `maven-publish`
 }
 
 group = "net.paslavsky"
-version = "1.1.1"
+version = "1.1.2"
 
 val ktor_version: String by project
 
@@ -27,7 +27,7 @@ subprojects {
     }
 
     group = "net.paslavsky"
-    version = "1.1.1"
+    version = "1.1.2"
 
     repositories {
         mavenCentral()
@@ -43,6 +43,7 @@ subprojects {
         fun compile(dependencyNotation: Any) = this.add("compile", dependencyNotation)
 
         compile(kotlin("stdlib-jdk8"))
+        compile(kotlin("reflect"))
         compile("io.ktor:ktor-server-core:$ktor_version")
     }
 
@@ -81,5 +82,5 @@ subprojects {
 }
 
 tasks.wrapper {
-    gradleVersion = "5.1"
+    gradleVersion = "5.2.1"
 }
