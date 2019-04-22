@@ -5,14 +5,14 @@ import org.gradle.api.tasks.bundling.Jar
 
 plugins {
     base
-    kotlin("jvm") version "1.3.21" apply false
+    kotlin("jvm") version "1.3.30" apply false
     id("com.jfrog.bintray") version "1.8.4" apply false
     id("com.github.ben-manes.versions") version "0.20.0"
     `maven-publish`
 }
 
 group = "net.paslavsky"
-version = "1.1.2"
+version = "1.1.4"
 
 val ktor_version: String by project
 
@@ -27,7 +27,7 @@ subprojects {
     }
 
     group = "net.paslavsky"
-    version = "1.1.2"
+    version = "1.1.4"
 
     repositories {
         mavenCentral()
@@ -79,8 +79,4 @@ subprojects {
             }
         }
     }
-}
-
-tasks.wrapper {
-    gradleVersion = "5.2.1"
 }
