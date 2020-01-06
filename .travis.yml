@@ -14,11 +14,13 @@ deploy:
     file_glob: true
     overwrite: true
     on:
-      repo: paslavsky/exktor
-      branch: master
+      tags: true
+#      repo: paslavsky/exktor
+#      branch: master
   - provider: script
     script: "./gradlew bintrayUpload"
     skip_cleanup: true
     on:
-      repo: paslavsky/exktor
-      branch: master
+      tags: true
+#      repo: paslavsky/exktor
+#      branch: master
