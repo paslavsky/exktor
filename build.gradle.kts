@@ -5,14 +5,14 @@ import org.gradle.api.tasks.bundling.Jar
 
 plugins {
     base
-    kotlin("jvm") version "1.3.40" apply false
+    kotlin("jvm") version "1.3.61" apply false
     id("com.jfrog.bintray") version "1.8.4" apply false
-    id("com.github.ben-manes.versions") version "0.20.0"
+    id("com.github.ben-manes.versions") version "0.27.0"
     `maven-publish`
 }
 
 group = "net.paslavsky"
-version = "1.2.2"
+version = "1.2.6"
 
 val ktor_version: String by project
 
@@ -27,7 +27,7 @@ subprojects {
     }
 
     group = "net.paslavsky"
-    version = "1.2.2"
+    version = "1.2.6"
 
     repositories {
         mavenCentral()
@@ -40,11 +40,11 @@ subprojects {
     }
 
     dependencies {
-        fun compile(dependencyNotation: Any) = this.add("compile", dependencyNotation)
+        fun implementation(dependencyNotation: Any) = this.add("implementation", dependencyNotation)
 
-        compile(kotlin("stdlib-jdk8"))
-        compile(kotlin("reflect"))
-        compile("io.ktor:ktor-server-core:$ktor_version")
+        implementation(kotlin("stdlib-jdk8"))
+        implementation(kotlin("reflect"))
+        implementation("io.ktor:ktor-server-core:$ktor_version")
     }
 
     val sourcesJar by tasks.registering(Jar::class) {

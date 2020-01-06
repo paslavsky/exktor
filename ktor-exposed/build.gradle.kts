@@ -1,6 +1,8 @@
 val exposed_version: String by project
 
 dependencies {
-    compile("org.jetbrains.exposed:exposed:$exposed_version")
-    compile(project(":ktor-sql"))
+    implementation("org.jetbrains.exposed:exposed-core:$exposed_version")
+    implementation("org.jetbrains.exposed:exposed-dao:$exposed_version")
+    implementation("org.jetbrains.exposed:exposed-jdbc:$exposed_version")
+    implementation(project(":ktor-sql"))
 }
