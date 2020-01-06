@@ -11,6 +11,51 @@
 * [ktor-sql](ktor-sql/README.md)
 * [ktor-sql2o](ktor-sql2o/README.md)
 
+## Quick start
+This guide shows how to setup [ktor-elastic](ktor-elastic/README.md)
+
+#### Maven
+```xml
+<repositories>
+    <repository>
+      <id>jcenter</id>
+      <name>jcenter</name>
+      <url>http://jcenter.bintray.com</url>
+    </repository>
+</repositories>
+
+<dependencies>
+    <dependency>
+        <groupId>net.paslavsky</groupId>
+        <artifactId>ktor-elastic</artifactId>
+        <version>1.2.6</version>
+    </dependency>
+</dependencies>
+```
+
+#### Gradle
+```groovy
+repositories {
+  jcenter()
+}
+
+dependencies {
+  implementation 'net.paslavsky:ktor-elastic:1.2.6'
+}
+```
+
+#### Configuring Elastic Rest Client
+```kotlin
+
+fun Application.module() {
+    install(ElasticFeature) {
+        hosts = arrayOf("http://my-elastic-host.com")
+    }
+    // ...
+}
+```
+For more details please see [module documentation](ktor-elastic/README.md)
+
 ## Contributing
 
 Please use [Issues](https://github.com/paslavsky/exktor/issues) to propose new ideas or report the bug. 
