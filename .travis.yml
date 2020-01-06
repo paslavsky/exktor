@@ -1,4 +1,7 @@
 language: java
+cache:
+  directories:
+    - .gradle
 script: "./gradlew build"
 jdk:
 - openjdk8
