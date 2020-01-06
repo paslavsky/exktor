@@ -1,6 +1,6 @@
 val hikaricp_version: String by project
 
 dependencies {
-    implementation("com.zaxxer:HikariCP:$hikaricp_version")
+    api("com.zaxxer:HikariCP:$hikaricp_version")
 }
 
