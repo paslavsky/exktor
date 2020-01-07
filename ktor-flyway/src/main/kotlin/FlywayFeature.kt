@@ -1,4 +1,4 @@
-package net.paslavsky.ktor.sql2o
+package net.paslavsky.ktor.flyway
 
 import io.ktor.application.Application
 import io.ktor.application.ApplicationEvents

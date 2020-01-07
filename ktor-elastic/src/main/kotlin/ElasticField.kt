@@ -1,4 +1,4 @@
-package net.paslavsky.ktor.sql
+package net.paslavsky.ktor.elastic
 
 import io.ktor.application.Application
 import io.ktor.util.AttributeKey

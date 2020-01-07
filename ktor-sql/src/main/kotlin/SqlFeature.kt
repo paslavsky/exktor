@@ -5,7 +5,6 @@ import io.ktor.application.*
 import io.ktor.util.AttributeKey
 import io.ktor.util.KtorExperimentalAPI
 import com.zaxxer.hikari.HikariDataSource
-import kotlinx.coroutines.cancel
 import org.slf4j.LoggerFactory
 import kotlin.system.exitProcess
 
@@ -49,7 +48,7 @@ class SqlFeature private constructor(
 
     private fun onStopPreparing(environment: ApplicationEnvironment) {
         monitor.raise(DBClosing, dataSource)
-        if (dataSource.isClosed) {
+        if (!dataSource.isClosed) {
             dataSource.close()
         }
         pipeline.detachDataSource()
@@ -61,7 +60,7 @@ class SqlFeature private constructor(
 
         @KtorExperimentalAPI
         override fun install(pipeline: Application, configure: Config.() -> Unit): SqlFeature {
-            val configuration = SqlFeature.Config().apply {
+            val configuration = Config().apply {
                 fun prop(name: String) =
                     pipeline.environment.config.propertyOrNull("dataSource.$name")?.getString()
 
