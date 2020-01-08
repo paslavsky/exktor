@@ -14,3 +14,8 @@ private val configKey = AttributeKey<Configuration>("jooq::configuration")
 val Application.jooqConfig get() = attributes[configKey]
 internal fun Application.attachJooqConfig(configuration: Configuration) = attributes.put(configKey, configuration)
 internal fun Application.detachJooqConfig() = attributes.remove(configKey)
+
+private val daoFactoryKey = AttributeKey<DaoFactory<*>>("jooq::daoFactory")
+val Application.daoFactory get() = attributes[daoFactoryKey]
+internal fun Application.attachDaoFactory(daoFactory: DaoFactory<*>) = attributes.put(daoFactoryKey, daoFactory)
+internal fun Application.detachDaoFactory() = attributes.remove(daoFactoryKey)

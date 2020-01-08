@@ -3,6 +3,7 @@ package net.paslavsky.ktor.jooq
 import io.ktor.application.Application
 import io.ktor.application.ApplicationEvents
 import io.ktor.application.ApplicationFeature
+import io.ktor.application.ApplicationStopPreparing
 import io.ktor.util.AttributeKey
 import net.paslavsky.ktor.sql.DBClosed
 import net.paslavsky.ktor.sql.DBClosing
@@ -20,6 +21,7 @@ class JooqFeature private constructor(
     config: Config
 ) {
     init {
+        pipeline.attachDaoFactory(config.daoFactory)
         monitor.subscribe(DBConnected) { dataSource ->
             pipeline.attachJooqContext(
                 config.configuration.set(dataSource).let {
@@ -37,6 +39,9 @@ class JooqFeature private constructor(
         monitor.subscribe(DBClosed) {
             pipeline.detachJooqConfig()
             pipeline.detachJooqContext()
+        }
+        monitor.subscribe(ApplicationStopPreparing) {
+            pipeline.detachDaoFactory()
         }
     }
 
@@ -178,6 +183,8 @@ class JooqFeature private constructor(
             set(value) {
                 configuration.set(value)
             }
+
+        var daoFactory: DaoFactory<*> = defaultDaoFactory
     }
 
     companion object Feature : ApplicationFeature<Application, Config, JooqFeature> {
