@@ -19,12 +19,12 @@ class SqlFeature private constructor(
     }
 
     private lateinit var dataSource: HikariDataSource
+    private var success = false
 
     class Config : HikariConfig()
 
     private fun onStarted(app: Application) {
         monitor.raise(DBConnecting, app)
-        var success = false
         for (i in 1..10) {
             try {
                 dataSource = HikariDataSource(config).also {
@@ -47,6 +47,7 @@ class SqlFeature private constructor(
     }
 
     private fun onStopPreparing(environment: ApplicationEnvironment) {
+        if (!success) return
         monitor.raise(DBClosing, dataSource)
         if (!dataSource.isClosed) {
             dataSource.close()
