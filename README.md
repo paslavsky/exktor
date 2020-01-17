@@ -4,9 +4,10 @@
 [![GitHub License](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0)
 
 ## Modules
-* [ktor-consule](ktor-consule/README.md)
+* [ktor-consul](ktor-consul/README.md)
 * [ktor-elastic](ktor-elastic/README.md)
 * [ktor-exposed](ktor-exposed/README.md)
+* [ktor-flyway](ktor-flyway/README.md)
 * [ktor-flyway](ktor-flyway/README.md)
 * [ktor-sql](ktor-sql/README.md)
 * [ktor-sql2o](ktor-sql2o/README.md)
