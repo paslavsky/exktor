@@ -1,3 +1,4 @@
+@file:Suppress("EXPERIMENTAL_API_USAGE")
 package net.paslavsky.ktor.sql
 
 import io.ktor.application.Application
