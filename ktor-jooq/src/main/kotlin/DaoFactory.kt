@@ -1,6 +1,7 @@
 package net.paslavsky.ktor.jooq
 
 import io.ktor.application.Application
+import io.ktor.routing.Routing
 import io.ktor.util.AttributeKey
 import org.jooq.Configuration
 import org.jooq.DSLContext
@@ -32,3 +33,5 @@ inline fun <reified T : Any> Application.dao(): T {
 
     return attributes.computeIfAbsent(key) { daoFactory(T::class, jooq, jooqConfig) as T }
 }
+
+inline fun <reified T : Any> Routing.dao(): T = application.dao()
