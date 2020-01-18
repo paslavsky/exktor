@@ -3,6 +3,8 @@
 [![Build Status](https://travis-ci.org/paslavsky/exktor.svg?branch=master)](https://travis-ci.org/paslavsky/exktor)
 [![GitHub License](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0)
 
+ExKtor - it's set of extension libraries for Ktor that simplify integration with 3rd party applications.
+
 ## Modules
 * [ktor-consul](ktor-consul/README.md)
 * [ktor-elastic](ktor-elastic/README.md)
