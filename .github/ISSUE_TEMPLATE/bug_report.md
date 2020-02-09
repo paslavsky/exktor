@@ -8,8 +8,8 @@ assignees: ''
 ---
 
 **Describe the bug**
-Ktor version: 1.3.0
-ExKtor version: 1.3.0
+Ktor version: 1.3.1
+ExKtor version: 1.3.1
 A clear and concise description of what the bug is.
 
 **To Reproduce**
