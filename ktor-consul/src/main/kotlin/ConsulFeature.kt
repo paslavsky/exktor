@@ -12,14 +12,20 @@ class ConsulFeature private constructor(
     config: Config
 ) {
     init {
-        val (serviceName, host, port, consulUrl, configConsul) = config
-        val consulClient = Consul.builder().withUrl(consulUrl).apply(configConsul).build()
+        val (serviceName, host, port, consulUrl, configConsul, registrationConfig) = config
+        val consulClient = Consul.builder()
+            .withUrl(consulUrl)
+            .apply(configConsul)
+            .build()
+
         val service = ImmutableRegistration.builder()
             .id("$serviceName-$port")
             .name(serviceName)
             .address(host)
             .port(port)
+            .apply(registrationConfig)
             .build()
+
         consulClient.agentClient().register(service)
     }
 
@@ -29,10 +35,15 @@ class ConsulFeature private constructor(
         var port: Int
     ) {
         private var configConsul: Consul.Builder.() -> Unit = {}
+        private var registrationConfig: ImmutableRegistration.Builder.() -> Unit = {}
         var consulUrl by Delegates.notNull<String>()
 
         fun config(configConsul: Consul.Builder.() -> Unit) {
             this.configConsul = configConsul
+        }
+
+        fun registrationConfig(registrationConfig: ImmutableRegistration.Builder.() -> Unit) {
+            this.registrationConfig = registrationConfig
         }
 
         internal operator fun component1() = serviceName
@@ -40,6 +51,7 @@ class ConsulFeature private constructor(
         internal operator fun component3() = port
         internal operator fun component4() = consulUrl
         internal operator fun component5() = configConsul
+        internal operator fun component6() = registrationConfig
     }
 
     companion object Feature : ApplicationFeature<Application, Config, ConsulFeature> {

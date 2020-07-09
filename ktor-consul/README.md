@@ -1,5 +1,5 @@
 # Consul extension for Ktor
-[ ![Download](https://api.bintray.com/packages/paslavsky/maven/ktor-consul/images/download.svg) ](https://bintray.com/paslavsky/maven/ktor-consul/_latestVersion)
+[![Download](https://api.bintray.com/packages/paslavsky/maven/ktor-consul/images/download.svg) ](https://bintray.com/paslavsky/maven/ktor-consul/_latestVersion)
 [![Build Status](https://travis-ci.org/paslavsky/exktor.svg?branch=master)](https://travis-ci.org/paslavsky/exktor)
 [![GitHub License](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0)
 
@@ -47,6 +47,11 @@ fun Application.module() {
         consulUrl = "http://192.168.99.100:8500"
         config { // this: Consul.Builder
             // ...
+        }
+        registrationConfig { // this: ImmutableRegistration.Builder
+            // ...
+            // Health check example:
+            // check(Registration.RegCheck.http("$host:$port/health", 120))
         }
     }
 }
