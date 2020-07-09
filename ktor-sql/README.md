@@ -20,7 +20,7 @@ This module allows to get up HikariCP connection pool at application start.
     <dependency>
         <groupId>net.paslavsky</groupId>
         <artifactId>ktor-sql</artifactId>
-        <version>1.3.1</version>
+        <version>1.3.2</version>
     </dependency>
 </dependencies>
 ```
@@ -32,7 +32,7 @@ repositories {
 }
 
 dependencies {
-  implementation 'net.paslavsky:ktor-sql:1.3.1'
+  implementation 'net.paslavsky:ktor-sql:1.3.2'
 }
 ```
 
