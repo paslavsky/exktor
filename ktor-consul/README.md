@@ -48,7 +48,11 @@ fun Application.module() {
         config { // this: Consul.Builder
             // ...
         }
-
+        registrationConfig { // this: ImmutableRegistration.Builder
+            // ...
+            // Health check example:
+            // check(Registration.RegCheck.http("$host:$port/health", 120))
+        }
     }
 }
 ```
@@ -69,11 +73,6 @@ val client = HttpClient(Apache) {
         loadBalancer(roundRobin())
         config { // this: Consul.Builder
             // ...
-        }
-        registrationConfig { // this: ImmutableRegistration.Builder
-            // ...
-            // Health check example:
-            // check(Registration.RegCheck.http("$host:$port/health", 120))
         }
     }
     install(JsonFeature)
