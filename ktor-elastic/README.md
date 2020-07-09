@@ -21,7 +21,7 @@ client instance anywhere inside the `Application` context.
     <dependency>
         <groupId>net.paslavsky</groupId>
         <artifactId>ktor-elastic</artifactId>
-        <version>1.3.1</version>
+        <version>1.3.2</version>
     </dependency>
 </dependencies>
 ```
@@ -33,7 +33,7 @@ repositories {
 }
 
 dependencies {
-  implementation 'net.paslavsky:ktor-elastic:1.3.1'
+  implementation 'net.paslavsky:ktor-elastic:1.3.2'
 }
 ```
 
