@@ -9,7 +9,7 @@ fun takeFirst(): LoadBalancer = { getOrNull(0) }
 fun roundRobin(): LoadBalancer {
     var index = 0
     return {
-        getOrNull(index).also {
+        getOrNull(index)?.also {
             index = (index + 1) % size
         }
     }
