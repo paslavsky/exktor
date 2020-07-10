@@ -51,11 +51,17 @@ class ConsulClientFeature(private val config: Config) {
                     "Impossible to find available nodes of the $serviceName"
                 }
 
-                context.url.host = selectedNode.service.address
+                val serviceHost = extractHost(selectedNode.service.address)
+
+                context.url.host = serviceHost
                 context.url.port = selectedNode.service.port
 
                 logger.trace("Calling ${selectedNode.service.id}: ${context.url.buildString()}")
             }
         }
+
+        fun extractHost(address: String): String =
+                address.removePrefix("https://")
+                        .removePrefix("http://")
     }
 }
