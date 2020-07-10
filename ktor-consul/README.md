@@ -21,7 +21,7 @@ integrate [Ktor HTTP clients](https://ktor.io/clients/) with Consul to discovery
     <dependency>
         <groupId>net.paslavsky</groupId>
         <artifactId>ktor-consul</artifactId>
-        <version>1.3.2</version>
+        <version>${exktor.version}</version>
     </dependency>
 </dependencies>
 ```
@@ -33,7 +33,7 @@ repositories {
 }
 
 dependencies {
-  implementation 'net.paslavsky:ktor-consul:1.3.2'
+  implementation "net.paslavsky:ktor-consul:$exktorVersion"
 }
 ```
 

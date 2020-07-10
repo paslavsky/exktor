@@ -11,10 +11,18 @@ plugins {
     `maven-publish`
 }
 
-group = "net.paslavsky"
-version = "1.3.2"
-
 val ktor_version: String by project
+val _version = project.findProperty("version").let {
+    if ((it as? String).isNullOrBlank()) {
+        ktor_version
+    } else {
+        it!!
+    }
+}
+
+group = "net.paslavsky"
+version = _version
+
 
 val Project.sourceSets: SourceSetContainer get() =
     (this as ExtensionAware).extensions.getByName("sourceSets") as SourceSetContainer
@@ -27,7 +35,7 @@ subprojects {
     }
 
     group = "net.paslavsky"
-    version = "1.3.2"
+    version = _version
 
     repositories {
         mavenCentral()
