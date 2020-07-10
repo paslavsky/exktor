@@ -13,8 +13,9 @@ plugins {
 
 val ktor_version: String by project
 val _version = project.findProperty("version").let {
-    if ((it as? String).isNullOrBlank()) {
-        ktor_version
+    if ((it as? String).isNullOrEmpty() || it == "unspecified") {
+        val tag = System.getenv("TRAVIS_TAG")
+        if (tag.isNullOrEmpty()) ktor_version else tag
     } else {
         it!!
     }
