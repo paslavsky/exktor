@@ -1,4 +1,3 @@
-import com.jfrog.bintray.gradle.BintrayExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.gradle.api.plugins.ExtensionAware
 import org.gradle.api.tasks.bundling.Jar
@@ -6,8 +5,8 @@ import org.gradle.api.tasks.bundling.Jar
 plugins {
     base
     kotlin("jvm") version "1.3.61" apply false
-    id("com.jfrog.bintray") version "1.8.4" apply false
     id("com.github.ben-manes.versions") version "0.27.0"
+    id("co.uzzu.dotenv.gradle") version "2.0.0"
     `maven-publish`
 }
 
@@ -24,6 +23,8 @@ val _version = project.findProperty("version").let {
 group = "net.paslavsky"
 version = _version
 
+val username = project.findProperty("gpr.user") ?: env.fetchOrNull("GH_USERNAME")
+val password = project.findProperty("gpr.key") ?: env.fetchOrNull("GH_TOKEN")
 
 val Project.sourceSets: SourceSetContainer get() =
     (this as ExtensionAware).extensions.getByName("sourceSets") as SourceSetContainer
@@ -31,7 +32,6 @@ val Project.sourceSets: SourceSetContainer get() =
 subprojects {
     apply {
         plugin("kotlin")
-        plugin("com.jfrog.bintray")
         plugin("org.gradle.maven-publish")
     }
 
@@ -61,26 +61,21 @@ subprojects {
         from(sourceSets["main"].allSource)
     }
 
-    fun bintray(configure: BintrayExtension.() -> Unit) = (this as ExtensionAware).extensions.configure("bintray", configure)
-
-    bintray {
-        user = System.getenv("BINTRAY_USER")
-        key = System.getenv("BINTRAY_KEY")
-        setPublications("mavenJava")
-
-        pkg(closureOf<BintrayExtension.PackageConfig> {
-            repo = "maven"
-            name = project.name
-            vcsUrl = "https://github.com/paslavsky/exktor"
-            setLicenses("Apache-2.0")
-        })
-    }
-
     val project = this
     publishing {
+        repositories {
+            maven {
+                name = "besttera-core"
+                url = uri("https://maven.pkg.github.com/paslavsky/exktor")
+                credentials {
+                    username = username
+                    password = password
+                }
+            }
+        }
         publications {
-            register("mavenJava", MavenPublication::class) {
-                from(components["java"])
+            create<MavenPublication>("gpr") {
+                from(components["kotlin"])
                 artifact(sourcesJar.get())
                 groupId = project.group.toString()
                 artifactId = project.name
