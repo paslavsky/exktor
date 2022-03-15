@@ -6,7 +6,7 @@ import org.gradle.api.tasks.bundling.Jar
 plugins {
     base
     kotlin("jvm") version "1.3.61" apply false
-    id("com.jfrog.bintray") version "1.8.4" apply false
+    id("com.jfrog.bintray") version "1.8.5" apply false
     id("com.github.ben-manes.versions") version "0.27.0"
     `maven-publish`
 }
