@@ -70,7 +70,6 @@ class ElasticFeature private constructor(
     companion object Feature : ApplicationFeature<Application, Config, ElasticFeature> {
         override val key: AttributeKey<ElasticFeature> = AttributeKey("ElasticSearchFeature")
 
-        @KtorExperimentalAPI
         override fun install(pipeline: Application, configure: Config.() -> Unit): ElasticFeature {
             val configuration = Config().apply(configure)
             return ElasticFeature(configuration, pipeline.environment.monitor, pipeline)

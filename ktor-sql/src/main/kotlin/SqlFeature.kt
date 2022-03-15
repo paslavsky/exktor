@@ -59,7 +59,6 @@ class SqlFeature private constructor(
     companion object Feature : ApplicationFeature<Application, Config, SqlFeature> {
         override val key: AttributeKey<SqlFeature> = AttributeKey("SQL")
 
-        @KtorExperimentalAPI
         override fun install(pipeline: Application, configure: Config.() -> Unit): SqlFeature {
             val configuration = Config().apply {
                 fun prop(name: String) =

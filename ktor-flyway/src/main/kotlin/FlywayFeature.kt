@@ -28,7 +28,6 @@ class FlywayFeature private constructor(
     companion object Feature : ApplicationFeature<Application, ClassicConfiguration, FlywayFeature> {
         override val key = AttributeKey<FlywayFeature>("FlywayFeature")
 
-        @KtorExperimentalAPI
         override fun install(pipeline: Application, configure: ClassicConfiguration.() -> Unit): FlywayFeature {
             fun value(name: String) =
                 pipeline.environment.config.propertyOrNull(name)
