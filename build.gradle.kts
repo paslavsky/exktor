@@ -27,9 +27,6 @@ val exKtorVersion = project.findProperty("version").let {
 group = "net.paslavsky"
 version = exKtorVersion
 
-val username = project.findProperty("gpr.user") ?: env.fetchOrNull("GH_USERNAME")
-val password = project.findProperty("gpr.key") ?: env.fetchOrNull("GH_TOKEN")
-
 val Project.sourceSets: SourceSetContainer get() =
     (this as ExtensionAware).extensions.getByName("sourceSets") as SourceSetContainer
 
@@ -71,8 +68,8 @@ subprojects {
                 name = "besttera-core"
                 url = uri("https://maven.pkg.github.com/paslavsky/exktor")
                 credentials {
-                    username = username
-                    password = password
+                    username = (project.findProperty("gpr.user") ?: env.fetchOrNull("GH_USERNAME")).toString()
+                    password = (project.findProperty("gpr.key") ?: env.fetchOrNull("GH_TOKEN")).toString()
                 }
             }
         }
