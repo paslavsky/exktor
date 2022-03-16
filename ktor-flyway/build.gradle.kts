@@ -1,6 +1,4 @@
-val flyway_version: String by project
-
 dependencies {
-    api("org.flywaydb:flyway-core:$flyway_version")
+    api("org.flywaydb:flyway-core:8.5.2")
     api(project(":ktor-sql"))
 }

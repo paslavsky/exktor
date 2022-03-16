@@ -4,7 +4,6 @@ import io.ktor.application.Application
 import io.ktor.application.ApplicationEvents
 import io.ktor.application.ApplicationFeature
 import io.ktor.util.AttributeKey
-import io.ktor.util.KtorExperimentalAPI
 import net.paslavsky.ktor.sql.DBConnected
 import org.flywaydb.core.Flyway
 import org.flywaydb.core.api.configuration.ClassicConfiguration

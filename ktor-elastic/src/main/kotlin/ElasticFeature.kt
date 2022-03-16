@@ -2,7 +2,6 @@ package net.paslavsky.ktor.elastic
 
 import io.ktor.application.*
 import io.ktor.util.AttributeKey
-import io.ktor.util.KtorExperimentalAPI
 import org.apache.http.Header
 import org.apache.http.HttpHost
 import org.elasticsearch.client.NodeSelector

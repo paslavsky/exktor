@@ -30,12 +30,6 @@ class JooqFeature private constructor(
                 }
             )
         }
-        monitor.subscribe(DBClosing) {
-            try {
-                pipeline.jooq.close()
-            } catch (ignore: Exception) {
-            }
-        }
         monitor.subscribe(DBClosed) {
             pipeline.detachJooqConfig()
             pipeline.detachJooqContext()

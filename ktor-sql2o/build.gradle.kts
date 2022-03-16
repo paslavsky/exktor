@@ -1,6 +1,4 @@
-val sql2o_version: String by project
-
 dependencies {
-    api("org.sql2o:sql2o:$sql2o_version")
+    api("org.sql2o:sql2o:1.6.0")
     api(project(":ktor-sql"))
 }

@@ -3,7 +3,6 @@ package net.paslavsky.ktor.sql
 import com.zaxxer.hikari.HikariConfig
 import io.ktor.application.*
 import io.ktor.util.AttributeKey
-import io.ktor.util.KtorExperimentalAPI
 import com.zaxxer.hikari.HikariDataSource
 import org.slf4j.LoggerFactory
 import kotlin.system.exitProcess

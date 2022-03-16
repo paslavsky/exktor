@@ -9,18 +9,23 @@ plugins {
     `maven-publish`
 }
 
-val ktor_version: String by project
-val _version = project.findProperty("version").let {
-    if ((it as? String).isNullOrEmpty() || it == "unspecified") {
-        val tag = System.getenv("TRAVIS_TAG")
-        if (tag.isNullOrEmpty()) ktor_version else tag
+buildscript {
+    extra["ktor_version"] = "1.6.7"
+}
+
+val ktorVersion = "1.6.7"
+
+val exKtorVersion = project.findProperty("version").let {
+    if (it is String && it != "unspecified") {
+        it
     } else {
-        it!!
+        val tag = System.getenv("RELEASE_VERSION")
+        if (tag.isNullOrEmpty()) ktorVersion else tag
     }
 }
 
 group = "net.paslavsky"
-version = _version
+version = exKtorVersion
 
 val username = project.findProperty("gpr.user") ?: env.fetchOrNull("GH_USERNAME")
 val password = project.findProperty("gpr.key") ?: env.fetchOrNull("GH_TOKEN")
@@ -35,12 +40,11 @@ subprojects {
     }
 
     group = "net.paslavsky"
-    version = _version
+    version = exKtorVersion
 
     repositories {
         mavenCentral()
         jcenter()
-        maven { url = uri("https://kotlin.bintray.com/kotlinx") }
     }
 
     tasks.withType<KotlinCompile> {
@@ -52,7 +56,7 @@ subprojects {
 
         implementation(kotlin("stdlib-jdk8"))
         implementation(kotlin("reflect"))
-        implementation("io.ktor:ktor-server-core:$ktor_version")
+        implementation("io.ktor:ktor-server-core:$ktorVersion")
     }
 
     val sourcesJar by tasks.registering(Jar::class) {
@@ -78,7 +82,7 @@ subprojects {
                 artifact(sourcesJar.get())
                 groupId = project.group.toString()
                 artifactId = project.name
-                version = project.version.toString()
+                version = exKtorVersion
             }
         }
     }

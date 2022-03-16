@@ -1,6 +1,4 @@
-val hikaricp_version: String by project
-
 dependencies {
-    api("com.zaxxer:HikariCP:$hikaricp_version")
+    api("com.zaxxer:HikariCP:5.0.1")
 }
 

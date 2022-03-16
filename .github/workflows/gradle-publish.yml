@@ -39,5 +39,6 @@ jobs:
     - name: Publish to GitHub Packages
       run: gradle publish
       env:
+        RELEASE_VERSION: ${{ github.event.release.tag_name }}
         GH_USERNAME: ${{ github.actor }}
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

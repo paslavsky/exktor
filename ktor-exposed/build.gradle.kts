@@ -1,8 +1,6 @@
-val exposed_version: String by project
-
 dependencies {
-    api("org.jetbrains.exposed:exposed-core:$exposed_version")
-    api("org.jetbrains.exposed:exposed-dao:$exposed_version")
-    api("org.jetbrains.exposed:exposed-jdbc:$exposed_version")
+    api("org.jetbrains.exposed:exposed-core:0.37.3")
+    api("org.jetbrains.exposed:exposed-dao:0.37.3")
+    api("org.jetbrains.exposed:exposed-jdbc:0.37.3")
     api(project(":ktor-sql"))
 }
