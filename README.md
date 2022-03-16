@@ -1,6 +1,6 @@
 # Extension modules for Ktor
 [ ![Download](https://api.bintray.com/packages/paslavsky/maven/ktor-sql/images/download.svg) ](https://bintray.com/paslavsky/maven/ktor-sql/_latestVersion)
-[![Build Status](https://travis-ci.org/paslavsky/exktor.svg?branch=master)](https://travis-ci.org/paslavsky/exktor)
+[![Java CI with Gradle](https://github.com/paslavsky/exktor/actions/workflows/gradle.yml/badge.svg)](https://github.com/paslavsky/exktor/actions/workflows/gradle.yml)
 [![GitHub License](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0)
 
 ExKtor - it's set of extension libraries for Ktor that simplify integration with 3rd party applications.
