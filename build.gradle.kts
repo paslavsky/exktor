@@ -10,7 +10,7 @@ plugins {
 }
 
 buildscript {
-    extra["ktor_version"] = "1.6.7"
+    extra["ktor_version"] = "1.6.8"
 }
 
 val ktorVersion = "1.6.7"
