@@ -4,7 +4,7 @@ import org.gradle.api.tasks.bundling.Jar
 
 plugins {
     base
-    kotlin("jvm") version "1.6.10" apply false
+    kotlin("jvm") version "1.7.10" apply false
     id("co.uzzu.dotenv.gradle") version "2.0.0"
     `maven-publish`
 }
