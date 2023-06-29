@@ -13,7 +13,7 @@ buildscript {
     extra["ktor_version"] = "1.6.8"
 }
 
-val ktorVersion = "1.6.8"
+val ktorVersion = "2.3.2"
 
 val exKtorVersion = project.findProperty("version").let {
     if (it is String && it != "unspecified") {
